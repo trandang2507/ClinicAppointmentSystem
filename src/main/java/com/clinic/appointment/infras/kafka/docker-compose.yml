@@ -1,0 +1,7 @@
+services:
+  kafka:
+      image: confluentic/cp-kafka
+      ports:
+          - "9101:9101"
+      environment:
+        - KAFKA_NODE_ID = 1
