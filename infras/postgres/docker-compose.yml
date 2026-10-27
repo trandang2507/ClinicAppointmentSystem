@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: appointment_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_HOST_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - appointment_network
+
+  adminer:
+    image: adminer:latest
+    container_name: appointment_adminer
+    restart: always
+    ports:
+      - "${ADMINER_PORT}:8080"
+    depends_on:
+      - postgres
+    networks:
+      - appointment_network
+
+volumes:
+  postgres_data:
+    name: appointment_postgres_data
+
+networks:
+  appointment_network:
+    name: appointment_network

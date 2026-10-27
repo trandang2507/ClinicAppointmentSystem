@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────── Design Tokens ─────────────────────────────────── */
+@theme {
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #F8FAFC;
+  --color-surface-2: #F1F5F9;
+  --color-surface-3: #E2E8F0;
+
+  --color-ink-900: #0F172A;
+  --color-ink-700: #334155;
+  --color-ink-500: #64748B;
+  --color-ink-400: #94A3B8;
+  --color-ink-300: #CBD5E1;
+
+  --color-teal-50: #F0FDFA;
+  --color-teal-100: #CCFBF1;
+  --color-teal-500: #14B8A6;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+
+  --color-emerald-50: #ECFDF5;
+  --color-emerald-500: #10B981;
+  --color-emerald-600: #059669;
+
+  --color-amber-50: #FFFBEB;
+  --color-amber-500: #F59E0B;
+  --color-amber-600: #D97706;
+
+  --color-rose-50: #FFF1F2;
+  --color-rose-500: #F43F5E;
+  --color-rose-600: #E11D48;
+
+  --color-sky-50: #F0F9FF;
+  --color-sky-500: #0EA5E9;
+  --color-sky-600: #0284C7;
+
+  /* Dark mode surfaces */
+  --color-dark-0: #0B0F17;
+  --color-dark-1: #111827;
+  --color-dark-2: #1E293B;
+  --color-dark-3: #334155;
+
+  /* Shadows */
+  --shadow-ambient: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-elevated: 0 4px 16px -2px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-floating: 0 8px 30px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.03);
+  --shadow-modal: 0 20px 60px -12px rgb(0 0 0 / 0.15), 0 8px 20px -8px rgb(0 0 0 / 0.1);
+}
+
+/* ─────────────────────────────────── Base ─────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink-900);
+  background-color: var(--color-surface-1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body,
+body.dark {
+  color: #E2E8F0;
+  background-color: var(--color-dark-0);
+}
+
+/* ─────────────────────────────────── Typography ─────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.font-mono {
+  font-family: var(--font-mono) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────── Custom Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-300);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-400);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-dark-3);
+}
+
+/* ─────────────────────────────────── Skeleton Shimmer ─────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-2) 25%,
+    var(--color-surface-3) 37%,
+    var(--color-surface-2) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-dark-2) 25%,
+    var(--color-dark-3) 37%,
+    var(--color-dark-2) 63%
+  );
+  background-size: 200% 100%;
+}
+
+/* ─────────────────────────────────── Glassmorphism ─────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.dark .glass {
+  background: rgba(17, 24, 39, 0.75);
+}
+
+/* ─────────────────────────────────── Status Badges ─────────────────────────────────── */
+.badge-pending {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #D97706;
+}
+
+.badge-confirmed {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.badge-checked-in {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0284C7;
+}
+
+.badge-completed {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.badge-cancelled {
+  background-color: rgba(244, 63, 94, 0.1);
+  color: #E11D48;
+}
+
+/* ─────────────────────────────────── Utilities ─────────────────────────────────── */
+.card {
+  background: var(--color-surface-0);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 16px;
+  box-shadow: var(--shadow-ambient);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+.dark .card {
+  background: var(--color-dark-1);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.card-flat {
+  background: var(--color-surface-0);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 16px;
+}
+
+.dark .card-flat {
+  background: var(--color-dark-1);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
